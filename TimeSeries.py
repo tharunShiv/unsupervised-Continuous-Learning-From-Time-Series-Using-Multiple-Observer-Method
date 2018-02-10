@@ -24,6 +24,8 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X[:, 38:41] = sc.fit_transform(X[:, 38:41])
 
+
+
 # Applying PCA
 from sklearn.decomposition import PCA
 pca = PCA(n_components = 2)   # first run with the n_components=None , then after seeing the explained variance, choose the number
@@ -69,36 +71,76 @@ ts.index = ts.InvoiceDate
 ts = ts.iloc[:, 1:3]
 #ts1 = ts.drop_duplicates()
 
-def unbiasedobv():
-    UBO = ts
-    
-def biasedobv_Mon():
-    from pandas.tseries.offsets import CustomBusinessDay
-    week_mask = 'Mon'
-    bo1 = CustomBusinessDay(weekmask=week_mask)
-    BOM = ts.asfreq(freq=bo1, method='ffill')
 
-def biasedobv_Tue():
-    from pandas.tseries.offsets import CustomBusinessDay
-    week_mask = 'Tue'
-    bo2 = CustomBusinessDay(weekmask=week_mask)
-    BOT = ts.asfreq(freq=bo2, method='ffill')
-    
-def biasedobv_Wed():
-    from pandas.tseries.offsets import CustomBusinessDay
-    week_mask = 'Wed'
-    bo3 = CustomBusinessDay(weekmask=week_mask)
-    BOW = ts.asfreq(freq=bo3, method='ffill')
+UBO = ts
 
-def biasedobv_Thu():
-    from pandas.tseries.offsets import CustomBusinessDay
-    week_mask = 'Thu'
-    bo4 = CustomBusinessDay(weekmask=week_mask)
-    BOTH = ts.asfreq(freq=bo4, method='ffill')
+from pandas.tseries.offsets import CustomBusinessDay
+week_mask = 'Mon'
+bo1 = CustomBusinessDay(weekmask=week_mask)
+BOM = ts.asfreq(freq=bo1, method='ffill')
+# Applying PCA
+from sklearn.decomposition import PCA
+pca1 = PCA(n_components = 1)   # first run with the n_components=None , then after seeing the explained variance, choose the number
+BOM = pca1.fit_transform(BOM)
+explained_variance = pca1.explained_variance_ratio_
+plt.plot(BOM, label='Monday')
+plt.title('Biased Observer - Monday')
+plt.legend('M')
+plt.figure('1')
 
-def biasedobv_Fri():
-    from pandas.tseries.offsets import CustomBusinessDay
-    week_mask = 'Sat'
-    bo5 = CustomBusinessDay(weekmask=week_mask)
-    BOF = ts.asfreq(freq=bo5, method='ffill')
-    
+
+from pandas.tseries.offsets import CustomBusinessDay
+week_mask = 'Tue'
+bo2 = CustomBusinessDay(weekmask=week_mask)
+BOT = ts.asfreq(freq=bo2, method='ffill')
+# Applying PCA
+from sklearn.decomposition import PCA
+pca1 = PCA(n_components = 1)   # first run with the n_components=None , then after seeing the explained variance, choose the number
+BOT = pca1.fit_transform(BOT)
+explained_variance = pca1.explained_variance_ratio_
+plt.plot(BOT)
+plt.title('Biased Observer - Tuesday')
+plt.legend('T')
+plt.figure('2')
+
+from pandas.tseries.offsets import CustomBusinessDay
+week_mask = 'Wed'
+bo3 = CustomBusinessDay(weekmask=week_mask)
+BOW = ts.asfreq(freq=bo3, method='ffill')
+# Applying PCA
+from sklearn.decomposition import PCA
+pca1 = PCA(n_components = 1)   # first run with the n_components=None , then after seeing the explained variance, choose the number
+BOW = pca1.fit_transform(BOW)
+explained_variance = pca1.explained_variance_ratio_
+plt.plot(BOW)
+plt.title('Biased Observer - Wednesday')
+plt.legend('W')
+plt.figure('3')
+
+from pandas.tseries.offsets import CustomBusinessDay
+week_mask = 'Thu'
+bo4 = CustomBusinessDay(weekmask=week_mask)
+BOTH = ts.asfreq(freq=bo4, method='ffill')
+# Applying PCA
+from sklearn.decomposition import PCA
+pca1 = PCA(n_components = 1)   # first run with the n_components=None , then after seeing the explained variance, choose the number
+BOTH = pca1.fit_transform(BOTH)
+explained_variance = pca1.explained_variance_ratio_
+plt.plot(BOTH)
+plt.title('Biased Observer - Thursday')
+plt.legend('T')
+plt.figure('4')
+
+from pandas.tseries.offsets import CustomBusinessDay
+week_mask = 'Fri'
+bo5 = CustomBusinessDay(weekmask=week_mask)
+BOF = ts.asfreq(freq=bo5, method='ffill')
+# Applying PCA
+from sklearn.decomposition import PCA
+pca1 = PCA(n_components = 1)   # first run with the n_components=None , then after seeing the explained variance, choose the number
+BOF = pca1.fit_transform(BOF)
+explained_variance = pca1.explained_variance_ratio_
+plt.plot(BOF)
+plt.title('Biased Observer - Friday')    
+plt.legend('F')
+plt.figure('5')
