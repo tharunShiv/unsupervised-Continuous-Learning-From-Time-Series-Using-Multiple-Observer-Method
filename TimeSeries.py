@@ -11,7 +11,6 @@ data = data.drop(data.columns[[1,2,3,7]], axis=1)
 #Now data is of DataFrame format, make it into sliceable format
 X = data.iloc[:, 1:].values
 
-
 # Encoding categorical data
 # Encoding the Independent Variable
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
@@ -20,20 +19,16 @@ X[:, 3] = labelencoder_X.fit_transform(X[:, 3])
 onehotencoder = OneHotEncoder(categorical_features = [3])
 X = onehotencoder.fit_transform(X).toarray()
 
-
 #feature scaling
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X[:, 38:41] = sc.fit_transform(X[:, 38:41])
-
-
 
 # Applying PCA
 from sklearn.decomposition import PCA
 pca = PCA(n_components = 2)   # first run with the n_components=None , then after seeing the explained variance, choose the number
 X = pca.fit_transform(X)
 explained_variance = pca.explained_variance_ratio_
-
 
 #K Means
 # Elbow method to find the optimal clusters
@@ -49,11 +44,8 @@ plt.xlabel('Number of clusters')
 plt.ylabel('WCSS')
 plt.show()
 
-
 kmeans = KMeans(n_clusters =4 , init = 'k-means++')
 y_kmeans = kmeans.fit_predict(X)
-
-
 
 plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 50, c = 'red', label = 'Cluster 1')
 plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 50, c = 'blue', label = 'Cluster 2')
@@ -68,7 +60,6 @@ plt.xlabel('PCA1')
 plt.ylabel('PCA2')
 plt.legend()
 plt.show()
-
 
 # Creating a DataFrame containing the timeseries data along with the pca features
 data.iloc[:, 1:3] = X[:, 0:2]
