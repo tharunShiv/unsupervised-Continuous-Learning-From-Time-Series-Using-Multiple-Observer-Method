@@ -144,3 +144,4 @@ plt.plot(BOF)
 plt.title('Biased Observer - Friday')    
 plt.legend('F')
 plt.figure('5')
+
