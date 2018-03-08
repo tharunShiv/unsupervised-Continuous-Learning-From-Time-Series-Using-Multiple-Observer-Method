@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
-data = pd.read_excel('dataset-DR.xlsx')
+data = pd.read_excel('dataset-1.xlsx')
 #dropping columns
 data = data.drop(data.columns[[1,2,3,7]], axis=1)
 #Now data is of DataFrame format, make it into sliceable format
@@ -46,13 +46,13 @@ plt.xlabel('Number of clusters')
 plt.ylabel('WCSS')
 plt.show()
 
-kmeans = KMeans(n_clusters =4 , init = 'k-means++')
+kmeans = KMeans(n_clusters =3 , init = 'k-means++')
 y_kmeans = kmeans.fit_predict(X)
 
 plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 50, c = 'red', label = 'Cluster 1')
 plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 50, c = 'blue', label = 'Cluster 2')
 plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 50, c = 'green', label = 'Cluster 3')
-plt.scatter(X[y_kmeans == 3, 0], X[y_kmeans == 3, 1], s = 50, c = 'cyan', label = 'Cluster 4')
+#plt.scatter(X[y_kmeans == 3, 0], X[y_kmeans == 3, 1], s = 50, c = 'cyan', label = 'Cluster 4')
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'yellow', label = 'Centroids')
 axes = plt.gca()
 axes.set_xlim([-25,40])
