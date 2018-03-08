@@ -7,7 +7,7 @@ import pandas as pd
 # Importing the dataset
 data = pd.read_excel('dataset-1.xlsx')
 #dropping columns
-data = data.drop(data.columns[[1,2,3,7]], axis=1)
+data = data.drop(data.columns[[1,2,3,7,8]], axis=1)
 #Now data is of DataFrame format, make it into sliceable format
 X = data.iloc[:, 1:].values
 
@@ -46,17 +46,17 @@ plt.xlabel('Number of clusters')
 plt.ylabel('WCSS')
 plt.show()
 
-kmeans = KMeans(n_clusters =3 , init = 'k-means++')
+kmeans = KMeans(n_clusters =2 , init = 'k-means++')
 y_kmeans = kmeans.fit_predict(X)
 
 plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s = 50, c = 'red', label = 'Cluster 1')
 plt.scatter(X[y_kmeans == 1, 0], X[y_kmeans == 1, 1], s = 50, c = 'blue', label = 'Cluster 2')
-plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 50, c = 'green', label = 'Cluster 3')
+#plt.scatter(X[y_kmeans == 2, 0], X[y_kmeans == 2, 1], s = 50, c = 'green', label = 'Cluster 3')
 #plt.scatter(X[y_kmeans == 3, 0], X[y_kmeans == 3, 1], s = 50, c = 'cyan', label = 'Cluster 4')
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'yellow', label = 'Centroids')
-axes = plt.gca()
-axes.set_xlim([-25,40])
-axes.set_ylim([-10, 40])
+#axes = plt.gca()
+#axes.set_xlim([-25,40])
+#axes.set_ylim([-10, 40])
 plt.title('Clusters of customers')
 plt.xlabel('PCA1')
 plt.ylabel('PCA2')
@@ -84,7 +84,7 @@ pca1 = PCA(n_components = 1)   # first run with the n_components=None , then aft
 BOM = pca1.fit_transform(BOM)
 explained_variance = pca1.explained_variance_ratio_
 plt.plot(BOM, label='Monday')
-plt.title('Biased Observer - Monday')
+plt.title('Biased Observer - Monday 2')
 plt.legend('M')
 plt.figure('1')
 
@@ -99,7 +99,7 @@ pca1 = PCA(n_components = 1)   # first run with the n_components=None , then aft
 BOT = pca1.fit_transform(BOT)
 explained_variance = pca1.explained_variance_ratio_
 plt.plot(BOT)
-plt.title('Biased Observer - Tuesday')
+plt.title('Biased Observer - Tuesday 2')
 plt.legend('T')
 plt.figure('2')
 
@@ -113,7 +113,7 @@ pca1 = PCA(n_components = 1)   # first run with the n_components=None , then aft
 BOW = pca1.fit_transform(BOW)
 explained_variance = pca1.explained_variance_ratio_
 plt.plot(BOW)
-plt.title('Biased Observer - Wednesday')
+plt.title('Biased Observer - Wednesday 2')
 plt.legend('W')
 plt.figure('3')
 
@@ -127,7 +127,7 @@ pca1 = PCA(n_components = 1)   # first run with the n_components=None , then aft
 BOTH = pca1.fit_transform(BOTH)
 explained_variance = pca1.explained_variance_ratio_
 plt.plot(BOTH)
-plt.title('Biased Observer - Thursday')
+plt.title('Biased Observer - Thursday 2')
 plt.legend('T')
 plt.figure('4')
 
@@ -141,7 +141,7 @@ pca1 = PCA(n_components = 1)   # first run with the n_components=None , then aft
 BOF = pca1.fit_transform(BOF)
 explained_variance = pca1.explained_variance_ratio_
 plt.plot(BOF)
-plt.title('Biased Observer - Friday')    
+plt.title('Biased Observer - Friday 2')    
 plt.legend('F')
 plt.figure('5')
 
